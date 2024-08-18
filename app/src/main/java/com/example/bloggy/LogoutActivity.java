@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -19,31 +18,21 @@ import java.net.URL;
 
 public class LogoutActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logout);
 
-        SharedPreferences getshared=getSharedPreferences("demo",MODE_PRIVATE);
-        String value=getshared.getString("login","none");
+        SharedPreferences getshared = getSharedPreferences("demo", MODE_PRIVATE);
+        String value = getshared.getString("login", "none");
 
-        String email=getshared.getString("email","none");
+        String email = getshared.getString("email", "none");
 
-        if(email.equals("none")){
+        if (email.equals("none")) {
 
-            SharedPreferences shred = getSharedPreferences("demo", MODE_PRIVATE);
-            SharedPreferences.Editor editor = shred.edit();
+            clearSharedPreferencesAndRedirect();
 
-            editor.remove("login");
-            editor.remove("email");
-            editor.apply();
-
-            Intent intent=new Intent(LogoutActivity.this,LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else{
+        } else {
             String jsonPayload = String.format("{\"email\":\"%s\"}", email);
 
             new Thread(() -> {
@@ -75,13 +64,12 @@ public class LogoutActivity extends AppCompatActivity {
                             response.append(line);
                         }
 
-                        JSONObject successmessage = new JSONObject(response.toString());
+                        JSONObject successMessage = new JSONObject(response.toString());
 
-                        String message=successmessage.getString("message");
+                        String message = successMessage.getString("message");
 
-                        Intent intent=new Intent(LogoutActivity.this,LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                        // Clear shared preferences and redirect on UI thread
+                        runOnUiThread(this::clearSharedPreferencesAndRedirect);
 
                     } else {
                         runOnUiThread(() -> {
@@ -91,7 +79,7 @@ public class LogoutActivity extends AppCompatActivity {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("SignUpActivity", "Request failed", e);
+                    Log.e("LogoutActivity", "Request failed", e);
                     runOnUiThread(() -> {
                         Toast.makeText(LogoutActivity.this, "Request failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
@@ -109,5 +97,18 @@ public class LogoutActivity extends AppCompatActivity {
                 }
             }).start();
         }
+    }
+
+    private void clearSharedPreferencesAndRedirect() {
+        SharedPreferences shred = getSharedPreferences("demo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = shred.edit();
+
+        editor.remove("login");
+        editor.remove("email");
+        editor.apply();
+
+        Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
