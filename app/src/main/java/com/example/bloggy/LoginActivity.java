@@ -3,6 +3,7 @@ package com.example.bloggy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -84,6 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         }
                         else{
+
+                            SharedPreferences shred=getSharedPreferences("demo",MODE_PRIVATE);
+                            SharedPreferences.Editor editor=shred.edit();
+
+                            editor.putString("login","done");
+                            editor.apply();
+
+
+
                             Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                             startActivity(intent);
                             finish();
