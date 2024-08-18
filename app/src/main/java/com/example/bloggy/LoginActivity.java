@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText EmailText;
     EditText PasswordText;
     Button login;
-
+    TextView signup;
     TextView forget;
 
     @Override
@@ -41,10 +41,18 @@ public class LoginActivity extends AppCompatActivity {
 
         forget=findViewById(R.id.forgetpass);
 
+        signup=findViewById(R.id.createaccount);
+
+        signup.setOnClickListener(v -> {
+            Intent intent=new Intent(LoginActivity.this, SignUp.class);
+            startActivity(intent);
+
+        });
+
         forget.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, ForgetPassword.class);
             startActivity(intent);
-            finish();
+
         });
 
         login.setOnClickListener(v -> {
