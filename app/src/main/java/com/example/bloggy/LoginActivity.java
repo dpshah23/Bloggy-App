@@ -124,9 +124,10 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "POST request failed. Response Code: " + responseCode, Toast.LENGTH_SHORT).show();
                         });
                     }
-                } catch (Exception e) {
+                }
+            catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("LoginActivity", "Request failed", e); // Log detailed error
+                    Log.e("LoginActivity", "Request failed", e);
                     runOnUiThread(() -> {
                         Toast.makeText(LoginActivity.this, "Request failed."+e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
@@ -141,8 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-            }).start();
+                }}).start();
         });
     }
 }

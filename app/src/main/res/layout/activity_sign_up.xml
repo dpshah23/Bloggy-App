@@ -89,7 +89,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/passwordInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -105,7 +105,7 @@
         app:layout_constraintVertical_bias="0.731" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/signupbtn"
         android:layout_width="203dp"
         android:layout_height="66dp"
         android:background="@color/background_color"
@@ -116,6 +116,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.887" />
+        app:layout_constraintVertical_bias="0.959" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
