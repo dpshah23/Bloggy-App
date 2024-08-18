@@ -111,8 +111,11 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor=shred.edit();
                             String email12 = EmailText.getText().toString();
 
+                            String username=obj.getString("username");
+
                             editor.putString("login","done");
                             editor.putString("email",email12);
+                            editor.putString("username",username);
                             editor.apply();
 
 

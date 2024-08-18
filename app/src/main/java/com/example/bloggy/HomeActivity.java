@@ -9,6 +9,8 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
 
+    Button createblog1;
+
     Button logoutbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,12 @@ public class HomeActivity extends AppCompatActivity {
 
         logoutbutton=findViewById(R.id.logoutbtn);
 
+        createblog1=findViewById(R.id.createblog);
+
+        createblog1.setOnClickListener(v -> {
+            Intent intent=new Intent(HomeActivity.this,CreateBlogActivity.class);
+            startActivity(intent);
+        });
         logoutbutton.setOnClickListener(v -> {
             Intent intent=new Intent(HomeActivity.this,LogoutActivity.class);
             startActivity(intent);
