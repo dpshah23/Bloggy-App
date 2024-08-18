@@ -22,6 +22,8 @@ public class SignUp extends AppCompatActivity {
     EditText email;
     EditText password;
     EditText name;
+    EditText username;
+    EditText phone;
     Button button;
 
     @Override
@@ -30,21 +32,25 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         name = findViewById(R.id.nameInput);
+        username = findViewById(R.id.user6366nameInput);
+        phone = findViewById(R.id.phoneInput);
         email = findViewById(R.id.emailInput);
         password = findViewById(R.id.passwordInput);
         button = findViewById(R.id.signupbtn);
 
         button.setOnClickListener(v -> {
             String nameinput = name.getText().toString();
+            String usernameinput = username.getText().toString();
+            String phoneinput = phone.getText().toString();
             String emailinput = email.getText().toString();
             String passwordinput = password.getText().toString();
 
-            if (emailinput.isEmpty() || nameinput.isEmpty() || passwordinput.isEmpty()) {
+            if (emailinput.isEmpty() || nameinput.isEmpty() || passwordinput.isEmpty() || usernameinput.isEmpty() || phoneinput.isEmpty()) {
                 Toast.makeText(SignUp.this, "All Details Are Mandatory", Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                // Corrected the String formatting for the JSON payload
-                String jsonPayload = String.format("{\"email\":\"%s\", \"password\":\"%s\",\"name\":\"%s\"}", emailinput, passwordinput, nameinput);
+                String jsonPayload = String.format("{\"email\":\"%s\", \"password\":\"%s\", \"name\":\"%s\", \"username\":\"%s\", \"phone\":\"%s\"}",
+                        emailinput, passwordinput, nameinput, usernameinput, phoneinput);
 
                 new Thread(() -> {
                     HttpURLConnection connection = null;
@@ -75,25 +81,26 @@ public class SignUp extends AppCompatActivity {
                                 response.append(line);
                             }
 
-                            JSONObject successmessage = new JSONObject(response.toString());
+                            JSONObject successMessage = new JSONObject(response.toString());
+                            String message = successMessage.getString("message");
 
-                            String message=successmessage.getString("message");
-
-                            if(message.equals("exists"))
-                            {
+                            if (message.equals("username_exists")) {
                                 runOnUiThread(() -> {
-                                    Toast.makeText(SignUp.this,"Email Already Exists",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUp.this, "Username Already Exists", Toast.LENGTH_SHORT).show();
                                 });
-
-                            }
-                            else{
-                                runOnUiThread(()-> {
+                            } else if (message.equals("created")) {
+                                runOnUiThread(() -> {
                                     Toast.makeText(SignUp.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SignUp.this, LoginActivity.class);
                                     startActivity(intent);
                                     finish();
                                 });
+                            } else {
+                                runOnUiThread(() -> {
+                                    Toast.makeText(SignUp.this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
+                                });
                             }
+
 
                         } else {
                             runOnUiThread(() -> {
