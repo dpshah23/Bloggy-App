@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Bloggy" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <item name="android:windowBackground">@color/background_color</item>
+
+        <item name="android:textColor">@color/text_color</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
