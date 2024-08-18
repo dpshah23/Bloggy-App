@@ -70,7 +70,10 @@ public class CreateBlogActivity extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        String base64String = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        return base64String.replaceAll("\\s", "");
     }
 
     private void submitBlog() {
