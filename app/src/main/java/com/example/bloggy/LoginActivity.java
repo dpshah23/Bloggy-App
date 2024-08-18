@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.OutputStream;
@@ -25,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText PasswordText;
     Button login;
 
+    TextView forget;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +39,21 @@ public class LoginActivity extends AppCompatActivity {
         PasswordText = findViewById(R.id.password);
         login = findViewById(R.id.loginbtn);
 
+        forget=findViewById(R.id.forgetpass);
+
+        forget.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgetPassword.class);
+            startActivity(intent);
+            finish();
+        });
+
         login.setOnClickListener(v -> {
             String email = EmailText.getText().toString();
             String password = PasswordText.getText().toString();
 
             // Validate input
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Email And Password Both Are Mandatory fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 

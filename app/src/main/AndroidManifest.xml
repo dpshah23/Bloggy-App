@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Bloggy"
         tools:targetApi="31">
         <activity
+            android:name=".ForgetPassword"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
