@@ -2,17 +2,21 @@ package com.example.bloggy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Struct;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -71,10 +75,19 @@ public class LoginActivity extends AppCompatActivity {
                             response.append(line);
                         }
 
+                        JSONObject obj=new JSONObject(String.valueOf(response));
+                        String message=obj.getString("message");
 
-                        runOnUiThread(() -> {
-                            Toast.makeText(LoginActivity.this, "Response: " + response.toString(), Toast.LENGTH_LONG).show();
-                        });
+                        if(message.equals("Login failed")){
+                            runOnUiThread(()->{
+                                Toast.makeText(LoginActivity.this,"Invalid Email or Pasword",Toast.LENGTH_SHORT).show();
+                            });
+                        }
+                        else{
+                            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     } else {
                         runOnUiThread(() -> {
                             Toast.makeText(LoginActivity.this, "POST request failed. Response Code: " + responseCode, Toast.LENGTH_SHORT).show();
