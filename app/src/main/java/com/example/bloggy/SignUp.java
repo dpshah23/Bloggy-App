@@ -32,7 +32,7 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         name = findViewById(R.id.nameInput);
-        username = findViewById(R.id.user6366nameInput);
+        username = findViewById(R.id.usernameInput);
         phone = findViewById(R.id.phoneInput);
         email = findViewById(R.id.emailInput);
         password = findViewById(R.id.passwordInput);
