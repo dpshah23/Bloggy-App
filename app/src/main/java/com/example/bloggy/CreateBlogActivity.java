@@ -85,8 +85,10 @@ public class CreateBlogActivity extends AppCompatActivity {
             return;
         }
 
-        // Convert the selected image to a Base64 string
+
         String base64Image = convertImageToBase64(selectedImage);
+
+        System.out.println("String Base64 : "+base64Image);
 
         // Get the email from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("demo", MODE_PRIVATE);
@@ -99,12 +101,12 @@ public class CreateBlogActivity extends AppCompatActivity {
             return;
         }
 
-
         String jsonPayload = String.format(
                 "{\"email\":\"%s\", \"username\":\"%s\", \"title\":\"%s\", \"content\":\"%s\", \"image\":\"%s\"}",
                 email, username, title, content, base64Image
         );
 
+        System.out.println("JSON Payload: " + jsonPayload);
         // Send JSON payload to your API
         new Thread(() -> {
             HttpURLConnection connection = null;
