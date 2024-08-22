@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         forget=findViewById(R.id.forgetpass);
 
         signup=findViewById(R.id.createaccount);
-
         signup.setOnClickListener(v -> {
             Intent intent=new Intent(LoginActivity.this, SignUp.class);
             startActivity(intent);

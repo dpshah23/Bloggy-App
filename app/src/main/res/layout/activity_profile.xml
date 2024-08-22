@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background_color"> <!-- Set a background color -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Avatar Image -->
+        <ImageView
+            android:id="@+id/profile_avatar"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="None"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_launcher_background"
+            android:elevation="6dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_launcher_foreground"  />
+
+        <!-- Name Label -->
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_avatar"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:text="Name:"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"/>
+
+        <!-- Name Data -->
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/label_name"
+            android:layout_alignBaseline="@id/label_name"
+            android:layout_marginStart="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:text="John Doe" />
+
+        <!-- Email Label -->
+        <TextView
+            android:id="@+id/label_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label_name"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp"
+            android:text="Email:"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"/>
+
+        <!-- Email Data -->
+        <TextView
+            android:id="@+id/profile_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/label_email"
+            android:layout_alignBaseline="@id/label_email"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="8dp"
+            android:text="john.doe@example.com" />
+
+        <!-- Phone Label -->
+        <TextView
+            android:id="@+id/label_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label_email"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp"
+            android:text="Phone:"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"/>
+
+        <!-- Phone Data -->
+        <TextView
+            android:id="@+id/profile_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/label_phone"
+            android:layout_alignBaseline="@id/label_phone"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="8dp"
+            android:text="+1 234 567 890"/>
+
+        <!-- Username Label -->
+        <TextView
+            android:id="@+id/label_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label_phone"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp"
+            android:text="Username:"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"/>
+
+        <!-- Username Data -->
+        <TextView
+            android:id="@+id/profile_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/label_username"
+            android:layout_alignBaseline="@id/label_username"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="8dp"
+            android:text="johndoe123" />
+    </RelativeLayout>
+</ScrollView>

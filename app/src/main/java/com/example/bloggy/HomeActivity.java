@@ -11,6 +11,9 @@ public class HomeActivity extends AppCompatActivity {
     Button createblog1;
 
     Button logoutbutton;
+    
+    Button profilebtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,9 @@ public class HomeActivity extends AppCompatActivity {
 
         createblog1=findViewById(R.id.createblog);
 
+        profilebtn=findViewById(R.id.profilebutton);
+
+
         createblog1.setOnClickListener(v -> {
             Intent intent=new Intent(HomeActivity.this,CreateBlogActivity.class);
             startActivity(intent);
@@ -29,6 +35,11 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent=new Intent(HomeActivity.this,LogoutActivity.class);
             startActivity(intent);
             finish();
+        });
+
+        profilebtn.setOnClickListener(v -> {
+            Intent intent= new Intent(HomeActivity.this,ProfileActivity.class);
+            startActivity(intent);
         });
     }
 
