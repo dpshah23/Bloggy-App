@@ -6,6 +6,7 @@
     android:background="@color/background_color"> <!-- Set a background color -->
 
     <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -15,13 +16,13 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_centerHorizontal="true"
-            android:contentDescription="None"
+            android:contentDescription="none"
             android:scaleType="centerCrop"
             android:background="@drawable/ic_launcher_background"
             android:elevation="6dp"
             android:layout_marginBottom="24dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/ic_launcher_foreground"  />
+            android:layout_marginTop="32dp" />
+
 
         <!-- Name Label -->
         <TextView

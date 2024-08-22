@@ -44,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity {
         phonenodata = findViewById(R.id.profile_phone);
         namedata = findViewById(R.id.profile_name);
 
+        profile_avatar=findViewById(R.id.profile_avatar);
+
         SharedPreferences hred = getSharedPreferences("demo", MODE_PRIVATE);
         String username = hred.getString("username", "");
 
@@ -54,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
             BufferedReader reader = null;
 
             try {
-                String urlString = String.format("http://10.0.2.2:8000/api/profile/%s",username);
+                String urlString = String.format("http://10.0.2.2:8000/api/profile/%s/",username);
                 URL url = new URL(urlString);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -78,35 +80,47 @@ public class ProfileActivity extends AppCompatActivity {
                         response.append(line);
                     }
 
+                    System.out.println(response);
                     JSONObject obj = new JSONObject(String.valueOf(response));
                     String message = obj.getString("message");
 
-                    if(message.equals("Failed")){
-                        Toast.makeText(ProfileActivity.this, "User Doesn't Exists", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else{
-                        String usernamedisp=obj.getString("username");
-                        String phone1=obj.getString("phone");
-                        String email1=obj.getString("email");
-                        String name1=obj.getString("name");
-
-                        String profilephotourl=obj.getString("avatar");
-
-                        emaildata.setText(email1);
-                        usernamedata.setText(usernamedisp);
-                        phonenodata.setText(phone1);
-                        namedata.setText(name1);
+                    runOnUiThread(() -> {
+                        if (message.equals("Failed")) {
+                            Toast.makeText(ProfileActivity.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
+                        } else {
+                            try {
+                                String usernameDisp = obj.getString("username");
+                                String phone = obj.getString("phone");
+                                String email = obj.getString("email");
+                                String name = obj.getString("name");
+                                String profilePhotoUrl = obj.getString("avatar");
+                                Log.d("ProfileActivity", "Profile Photo URL: " + profilePhotoUrl);
 
 
-                    }
+
+                                emaildata.setText(email);
+                                usernamedata.setText(usernameDisp);
+                                phonenodata.setText(phone);
+                                namedata.setText(name);
+
+
+                                Glide.with(ProfileActivity.this)
+                                        .load(profilePhotoUrl)
+                                        .into(profile_avatar);
+
+                            } catch (Exception e) {
+                                Log.e("ProfileActivity", "Error parsing JSON", e);
+                            }
+                        }
+                    });
+
 
 
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
-        });
+        }).start();
 
     }
 }
