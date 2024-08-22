@@ -47,7 +47,7 @@
             android:layout_marginStart="8dp"
             android:textSize="18sp"
             android:textColor="@color/text_color"
-            android:text="John Doe" />
+            android:text="" />
 
         <!-- Email Label -->
         <TextView
@@ -72,7 +72,7 @@
             android:textSize="18sp"
             android:textColor="@color/text_color"
             android:layout_marginStart="8dp"
-            android:text="john.doe@example.com" />
+            android:text="" />
 
         <!-- Phone Label -->
         <TextView
@@ -97,7 +97,7 @@
             android:textSize="18sp"
             android:textColor="@color/text_color"
             android:layout_marginStart="8dp"
-            android:text="+1 234 567 890"/>
+            android:text=""/>
 
         <!-- Username Label -->
         <TextView
@@ -122,6 +122,6 @@
             android:textSize="18sp"
             android:textColor="@color/text_color"
             android:layout_marginStart="8dp"
-            android:text="johndoe123" />
+            android:text="" />
     </RelativeLayout>
 </ScrollView>
