@@ -7,14 +7,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,6 +40,30 @@ public class CreateBlogActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_blog);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+        bottomNavigationView.setSelectedItemId(R.id.create);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.home) {
+                    startActivity(new Intent(CreateBlogActivity.this, HomeActivity.class));
+                    return true;
+                } else if (itemId == R.id.create) {
+                    startActivity(new Intent(CreateBlogActivity.this, CreateBlogActivity.class));
+                    return true;
+                } else if (itemId == R.id.myblog) {
+                    startActivity(new Intent(CreateBlogActivity.this, MyBlogsActivity.class));
+                    return true;
+                } else if (itemId == R.id.profile) {
+                    startActivity(new Intent(CreateBlogActivity.this, ProfileActivity.class));
+                    return true;
+                }
+
+                return false;
+            }
+        });
 
         blogTitle = findViewById(R.id.blogTitle);
         blogContent = findViewById(R.id.blogContent);

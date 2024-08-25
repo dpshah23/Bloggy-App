@@ -1,19 +1,24 @@
 package com.example.bloggy;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import  com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
@@ -27,12 +32,39 @@ public class ProfileActivity extends AppCompatActivity {
 
     ImageView profile_avatar;
 
-    TextView emaildata,usernamedata,phonenodata,namedata;
+    TextView emaildata, usernamedata, phonenodata, namedata;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+        bottomNavigationView.setSelectedItemId(R.id.profile);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.home) {
+                    startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
+                    return true;
+                } else if (itemId == R.id.create) {
+                    startActivity(new Intent(ProfileActivity.this, CreateBlogActivity.class));
+                    return true;
+                } else if (itemId == R.id.myblog) {
+                    startActivity(new Intent(ProfileActivity.this, MyBlogsActivity.class));
+                    return true;
+                } else if (itemId == R.id.profile) {
+                    startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -44,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
         phonenodata = findViewById(R.id.profile_phone);
         namedata = findViewById(R.id.profile_name);
 
-        profile_avatar=findViewById(R.id.profile_avatar);
+        profile_avatar = findViewById(R.id.profile_avatar);
 
         SharedPreferences hred = getSharedPreferences("demo", MODE_PRIVATE);
         String username = hred.getString("username", "");
@@ -56,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
             BufferedReader reader = null;
 
             try {
-                String urlString = String.format("http://10.0.2.2:8000/api/profile/%s/",username);
+                String urlString = String.format("http://10.0.2.2:8000/api/profile/%s/", username);
                 URL url = new URL(urlString);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -97,7 +129,6 @@ public class ProfileActivity extends AppCompatActivity {
                                 Log.d("ProfileActivity", "Profile Photo URL: " + profilePhotoUrl);
 
 
-
                                 emaildata.setText(email);
                                 usernamedata.setText(usernameDisp);
                                 phonenodata.setText(phone);
@@ -113,7 +144,6 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         }
                     });
-
 
 
                 }

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/background_color"> <!-- Set a background color -->
-
-    <RelativeLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background_color"
+    tools:context=".ProfileActivity"> <!-- Set a background color -->
         <!-- Avatar Image -->
         <ImageView
             android:id="@+id/profile_avatar"
@@ -32,6 +28,7 @@
             android:layout_below="@id/profile_avatar"
             android:layout_alignParentStart="true"
             android:layout_marginTop="16dp"
+            android:padding="16dp"
             android:text="Name:"
             android:textSize="18sp"
             android:textColor="@color/text_color"
@@ -57,6 +54,7 @@
             android:layout_below="@id/label_name"
             android:layout_alignParentStart="true"
             android:layout_marginTop="12dp"
+            android:padding="16dp"
             android:text="Email:"
             android:textSize="18sp"
             android:textColor="@color/text_color"
@@ -82,6 +80,7 @@
             android:layout_below="@id/label_email"
             android:layout_alignParentStart="true"
             android:layout_marginTop="12dp"
+            android:padding="16dp"
             android:text="Phone:"
             android:textSize="18sp"
             android:textColor="@color/text_color"
@@ -107,6 +106,7 @@
             android:layout_below="@id/label_phone"
             android:layout_alignParentStart="true"
             android:layout_marginTop="12dp"
+            android:padding="16dp"
             android:text="Username:"
             android:textSize="18sp"
             android:textColor="@color/text_color"
@@ -123,5 +123,23 @@
             android:textColor="@color/text_color"
             android:layout_marginStart="8dp"
             android:text="" />
+
+    <FrameLayout
+        android:id="@+id/navid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/bottomnav"
+            android:background="@color/background_color"
+            app:itemIconTint="@drawable/nav_item"
+            app:itemRippleColor="@drawable/ripple_color"
+            app:itemIconSize="40dp"
+            app:menu="@menu/nav"
+            app:labelVisibilityMode="unlabeled"/>
+
     </RelativeLayout>
-</ScrollView>

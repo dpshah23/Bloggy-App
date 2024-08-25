@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,6 +16,10 @@
         <!-- Blog Image -->
 
         <!-- Button to Select Image -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
         <EditText
             android:id="@+id/blogTitle"
             android:layout_width="match_parent"
@@ -22,7 +28,8 @@
             android:background="@drawable/edittext_background"
             android:hint="Enter Blog Title"
             android:padding="10dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageView
             android:id="@+id/blogImage"
@@ -64,6 +71,22 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Create Blog" />
-
     </LinearLayout>
-</ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/navid"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomnav"
+        android:background="@color/background_color"
+        app:itemIconTint="@drawable/nav_item"
+        app:itemRippleColor="@drawable/ripple_color"
+        app:itemIconSize="40dp"
+        app:menu="@menu/nav"
+        app:labelVisibilityMode="unlabeled"/>
+</RelativeLayout>
