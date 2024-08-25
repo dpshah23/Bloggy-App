@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#090909"
     android:orientation="vertical"
     tools:context=".LoginActivity">
     <androidx.cardview.widget.CardView
@@ -12,12 +13,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="50dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="#0D0D0D"
-        app:cardStrokeColor="@color/outlineColor"
-        app:cardStrokeWidth="2dp">
+        app:cardBackgroundColor="#161515">
 
         <!-- Your login content here -->
         <LinearLayout
