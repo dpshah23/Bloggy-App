@@ -145,6 +145,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -168,10 +169,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity {
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private BlogAdapter blogAdapter;
     private List<Blog> blogList = new ArrayList<>();
@@ -179,12 +182,28 @@ public class HomeActivity extends AppCompatActivity {
     private int pageNumber = 1;
     private int totalPages = 1;  // Assuming the API returns this value
 
+
+    private void refreshBlogs() {
+        pageNumber = 1;
+        blogList.clear();
+        fetchBlogsFromApi(pageNumber);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         recyclerView = findViewById(R.id.recyclerView);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Perform the refresh operation here
+                refreshBlogs();
+            }
+        });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -282,7 +301,9 @@ public class HomeActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 blogAdapter.notifyDataSetChanged();
+                                swipeRefreshLayout.setRefreshing(false);
                             }
                         });
 
