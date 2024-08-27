@@ -1,8 +1,11 @@
 package com.example.bloggy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -13,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,20 +35,33 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MyBlogsActivity extends AppCompatActivity {
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private BlogAdapter blogAdapter;
     private List<Blog> blogList = new ArrayList<>();
     private boolean isLoading = false;
     private int pageNumber = 1;
     private int totalPages = 1;  // Assuming the API returns this value
+    private TextView noBlogsMessage;
+
+    private void refreshBlogs() {
+        pageNumber = 1;
+        blogList.clear();
+        fetchBlogsFromApi(pageNumber);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_my_blogs);
+
+        noBlogsMessage = findViewById(R.id.noBlogsMessage);
+        swipeRefreshLayout=findViewById(R.id.swipeRefresh);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
         bottomNavigationView.setSelectedItemId(R.id.myblog);
+
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -52,6 +69,14 @@ public class MyBlogsActivity extends AppCompatActivity {
 
         blogAdapter = new BlogAdapter(blogList, this);
         recyclerView.setAdapter(blogAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Perform the refresh operation here
+                refreshBlogs();
+            }
+        });
 
         // Fetch the initial set of blogs
         fetchBlogsFromApi(pageNumber);
@@ -73,7 +98,6 @@ public class MyBlogsActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -103,31 +127,51 @@ public class MyBlogsActivity extends AppCompatActivity {
             return insets;
         });
     }
-        private void fetchBlogsFromApi(int page) {
-            isLoading = true;
-            OkHttpClient client = new OkHttpClient();
-            String url = "http://10.0.2.2:8000/api/getuserblog/dpshah2307/" + page; // Assuming the API supports pagination
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
+    private void fetchBlogsFromApi(int page) {
+        isLoading = true;
+        OkHttpClient client = new OkHttpClient();
 
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    e.printStackTrace();
-                    isLoading = false;
-                }
+        SharedPreferences hred = getSharedPreferences("demo", MODE_PRIVATE);
+        String username = hred.getString("username", "");
+        String url = String.format("http://10.0.2.2:8000/api/getuserblog/%s/?page=%d", username, page); // Assuming the API supports pagination
 
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        String responseData = response.body().string();
-                        try {
-                            JSONObject jsonResponse = new JSONObject(responseData);
-                            JSONArray blogsArray = jsonResponse.getJSONArray("data");
-                            totalPages = jsonResponse.getInt("total_pages");  // Get the total pages from the API response
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
 
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+                isLoading = false;
+                runOnUiThread(() -> {
+                    // Stop refreshing animation if needed
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseData = response.body().string();
+                    try {
+                        JSONObject jsonResponse = new JSONObject(responseData);
+                        JSONArray blogsArray = jsonResponse.getJSONArray("data");
+                        totalPages = jsonResponse.getInt("total_pages");  // Get the total pages from the API response
+
+                        runOnUiThread(() -> {
+                            if (blogsArray.length() == 0 && pageNumber == 1) {
+                                // Show no blogs message and hide recyclerView if it's the first page
+                                recyclerView.setVisibility(View.GONE);
+                                noBlogsMessage.setVisibility(View.VISIBLE);
+                            } else {
+                                // Hide no blogs message and show recyclerView
+                                noBlogsMessage.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
+                        });
+
+                        if (blogsArray.length() > 0) {
                             for (int i = 0; i < blogsArray.length(); i++) {
                                 JSONObject blogObject = blogsArray.getJSONObject(i);
 
@@ -144,24 +188,17 @@ public class MyBlogsActivity extends AppCompatActivity {
                                 blogList.add(blog);
                             }
 
-                            // Update UI on the main thread
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    blogAdapter.notifyDataSetChanged();
-                                }
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } finally {
-                            isLoading = false;
+                            runOnUiThread(() -> blogAdapter.notifyDataSetChanged());
                         }
-                    } else {
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally {
                         isLoading = false;
                     }
+                } else {
+                    isLoading = false;
                 }
-            });
-
-        }
+            }
+        });
     }
+}
