@@ -16,6 +16,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="90dp"
+                android:src="@drawable/bloggy_logo"
+                android:layout_gravity="center"/>
+
             <!-- Title -->
             <TextView
                 android:id="@+id/title"

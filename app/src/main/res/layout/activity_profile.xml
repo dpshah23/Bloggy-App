@@ -8,6 +8,15 @@
     android:background="@color/background_color"
     tools:context=".ProfileActivity"> <!-- Set a background color -->
         <!-- Avatar Image -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="90dp"
+            android:src="@drawable/bloggy_logo" />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -25,7 +34,7 @@
             android:background="@drawable/ic_launcher_background"
             android:elevation="6dp"
             android:layout_marginBottom="24dp"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="100dp" />
 
 
         <!-- Name Label -->
