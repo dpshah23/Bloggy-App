@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -56,6 +57,18 @@ public class HomeActivity extends AppCompatActivity {
 
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         recyclerView = findViewById(R.id.recyclerView);
+
+        boolean isConnected = NetworkUtil.isConnectedToInternet(this);
+
+        if (NetworkUtil.isConnectedToInternet(this)) {
+
+        } else {
+
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeActivity.this, NoInternetActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
