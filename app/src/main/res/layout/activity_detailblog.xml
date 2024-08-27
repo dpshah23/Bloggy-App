@@ -1,93 +1,107 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:paddingBottom="8dp"/>
-
-        <!-- Username and Timestamp -->
-
-<!--            <TextView-->
-<!--                android:id="@+id/username"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Username"-->
-<!--                android:textSize="14sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/timestamp"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Timestamp"-->
-<!--                android:textSize="14sp"/>-->
-            <TextView
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
-            android:text="deep" />
-
-            <TextView
-                android:id="@+id/timestamp"
-                android:textAlignment="textEnd"
-                android:layout_marginEnd="50dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:text="12pm" />
-
-        <!-- Views Count -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="16dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/view_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_remove_red_eye_24"/>
-
+            <!-- Title -->
             <TextView
-                android:id="@+id/views_count"
-                android:layout_width="wrap_content"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Views Count"
-                android:textSize="14sp"
-                android:layout_marginStart="8dp"/>
+                android:text="Title"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp"/>
+
+            <!-- Username and Timestamp -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="deep"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12pm"
+                    android:layout_marginStart="20dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Views Count -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/view_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_remove_red_eye_24"/>
+
+                <TextView
+                    android:id="@+id/views_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Views Count"
+                    android:textSize="20sp"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+
+            <!-- Image -->
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="330dp"
+                android:layout_gravity="center"
+                android:layout_height="330dp"
+                android:scaleType="centerCrop"
+                android:paddingBottom="16dp"/>
+
+            <!-- Content Text -->
+            <TextView
+                android:id="@+id/content_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Content text goes here."
+                android:textSize="20sp"
+                android:paddingBottom="16dp"/>
+
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Image -->
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:paddingBottom="16dp"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomnav"
+        android:background="@color/background_color"
+        app:itemIconTint="@color/nav_item"
+        app:itemRippleColor="@color/ripple_color"
+        android:stateListAnimator="@animator/icon_animator"
+        app:itemIconSize="40dp"
+        app:menu="@menu/nav"
+        app:labelVisibilityMode="unlabeled"/>
 
-        <!-- Content Text -->
-        <TextView
-            android:id="@+id/content_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Content text goes here."
-            android:textSize="16sp"
-            android:paddingBottom="16dp"/>
-
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

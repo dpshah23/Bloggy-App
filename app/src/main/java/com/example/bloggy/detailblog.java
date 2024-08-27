@@ -1,19 +1,23 @@
 package com.example.bloggy;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
@@ -37,7 +41,11 @@ public class detailblog extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_detailblog);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+        bottomNavigationView.setSelectedItemId(R.id.home);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -46,6 +54,29 @@ public class detailblog extends AppCompatActivity {
         String blogId = getIntent().getStringExtra("BLOG_ID");
         System.out.println(blogId);
         String jsonPayload=String.format("{\"blogid\":\"%s\"}",blogId);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.home) {
+                    startActivity(new Intent(detailblog.this, HomeActivity.class));
+                    return true;
+                } else if (itemId == R.id.create) {
+                    startActivity(new Intent(detailblog.this, CreateBlogActivity.class));
+                    return true;
+                } else if (itemId == R.id.myblog) {
+                    startActivity(new Intent(detailblog.this, MyBlogsActivity.class));
+                    return true;
+                } else if (itemId == R.id.profile) {
+                    startActivity(new Intent(detailblog.this, ProfileActivity.class));
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
         new Thread(() -> {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
