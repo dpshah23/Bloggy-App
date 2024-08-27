@@ -8,6 +8,13 @@
     android:background="@color/background_color"
     tools:context=".ProfileActivity"> <!-- Set a background color -->
         <!-- Avatar Image -->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_alignParentRight="true"
+        android:id="@+id/logout"/>
         <ImageView
             android:id="@+id/profile_avatar"
             android:layout_width="140dp"
