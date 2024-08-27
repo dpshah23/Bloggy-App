@@ -48,6 +48,7 @@ public class MyBlogsActivity extends AppCompatActivity {
         pageNumber = 1;
         blogList.clear();
         fetchBlogsFromApi(pageNumber);
+
     }
 
     @Override
@@ -164,6 +165,7 @@ public class MyBlogsActivity extends AppCompatActivity {
                                 // Show no blogs message and hide recyclerView if it's the first page
                                 recyclerView.setVisibility(View.GONE);
                                 noBlogsMessage.setVisibility(View.VISIBLE);
+                                swipeRefreshLayout.setRefreshing(false);
                             } else {
                                 // Hide no blogs message and show recyclerView
                                 noBlogsMessage.setVisibility(View.GONE);
@@ -188,7 +190,15 @@ public class MyBlogsActivity extends AppCompatActivity {
                                 blogList.add(blog);
                             }
 
-                            runOnUiThread(() -> blogAdapter.notifyDataSetChanged());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    blogAdapter.notifyDataSetChanged();
+                                    swipeRefreshLayout.setRefreshing(false);
+                                }
+                            });
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
