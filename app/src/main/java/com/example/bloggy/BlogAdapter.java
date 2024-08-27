@@ -1,6 +1,7 @@
 package com.example.bloggy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,12 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
 
         holder.username.setText(blog.getUsername());
         holder.timestamp.setText(blog.getTimestamp());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, detailblog.class);
+            intent.putExtra("BLOG_ID", blog.getId()); // Pass the blog ID to the new activity
+            context.startActivity(intent);
+        });
     }
 
     @Override
