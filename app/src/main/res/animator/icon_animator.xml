@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
         <item android:state_pressed="true">
             <objectAnimator
                 android:propertyName="tint"
                 android:duration="100"
-                android:valueFrom="@color/your_default_color"
-                android:valueTo="@color/your_color_after_ripple"
+                android:valueFrom="@color/text_color"
+                android:valueTo="@color/background_color"
                 android:valueType="intType" />
         </item>
         <item>
             <objectAnimator
                 android:propertyName="tint"
                 android:duration="100"
-                android:valueFrom="@color/your_color_after_ripple"
-                android:valueTo="@color/your_default_color"
+                android:valueFrom="@color/background_color"
+                android:valueTo="@color/text_color"
                 android:valueType="intType" />
         </item>
-    
-
 </selector>

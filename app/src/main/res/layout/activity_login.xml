@@ -8,23 +8,6 @@
     android:background="#090909"
     android:orientation="vertical"
     tools:context=".LoginActivity">
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="#161515">
-
-        <!-- Your login content here -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="16dp">
 
     <ImageView
         android:layout_width="160dp"
@@ -47,6 +30,8 @@
         android:textSize="20sp"
         android:background="@drawable/rounded_corner"
         android:padding="18dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:inputType="text"
         android:id="@+id/emailaddress"
         android:layout_marginTop="32dp"
@@ -61,6 +46,8 @@
         android:textSize="20sp"
         android:background="@drawable/rounded_corner"
         android:padding="18dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:inputType="textPassword"
         android:id="@+id/password"
         android:layout_marginTop="16dp"/>
@@ -114,6 +101,4 @@
         android:textSize="20sp"
         tools:ignore="MissingConstraints" />
 </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </LinearLayout>

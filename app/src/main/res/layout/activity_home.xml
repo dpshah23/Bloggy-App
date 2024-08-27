@@ -6,109 +6,174 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingClass">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
         android:layout_alignParentRight="true"
         android:id="@+id/logout"/>
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="4dp"
-        card_view:cardBackgroundColor="#5CDFE9F2">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        card_view:cardCornerRadius="8dp"-->
+<!--        card_view:cardElevation="4dp"-->
+<!--        card_view:cardBackgroundColor="#5CDFE9F2">-->
 
-        <!-- ShimmerLayout for the loading effect -->
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:shimmer_auto_start="true"
-            app:shimmer_duration="1500">
+<!--        &lt;!&ndash; ShimmerLayout for the loading effect &ndash;&gt;-->
+<!--        <com.facebook.shimmer.ShimmerFrameLayout-->
+<!--            android:id="@+id/shimmer_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="16dp"-->
+<!--            app:shimmer_auto_start="true"-->
+<!--            app:shimmer_duration="1500">-->
 
-            <!-- Placeholder Views -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+<!--            &lt;!&ndash; Placeholder Views &ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
 
-                <!-- Placeholder for Image -->
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/placeholder_color"
-                    android:layout_marginBottom="16dp"/>
+<!--                &lt;!&ndash; Placeholder for Image &ndash;&gt;-->
+<!--                <View-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:background="@color/placeholder_color"-->
+<!--                    android:layout_marginBottom="16dp"/>-->
 
-                <!-- Placeholder for Title -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:background="@color/placeholder_color"
-                    android:layout_marginBottom="8dp"/>
+<!--                &lt;!&ndash; Placeholder for Title &ndash;&gt;-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:background="@color/placeholder_color"-->
+<!--                    android:layout_marginBottom="8dp"/>-->
 
-                <!-- Placeholder for Content -->
-                <View
-                    android:layout_width="190dp"
-                    android:layout_height="20dp"
-                    android:background="@color/placeholder_color"
-                    android:layout_marginBottom="8dp"/>
+<!--                &lt;!&ndash; Placeholder for Content &ndash;&gt;-->
+<!--                <View-->
+<!--                    android:layout_width="190dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:background="@color/placeholder_color"-->
+<!--                    android:layout_marginBottom="8dp"/>-->
 
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:background="@color/placeholder_color"/>
+<!--                <View-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:background="@color/placeholder_color"/>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </com.facebook.shimmer.ShimmerFrameLayout>
+<!--        </com.facebook.shimmer.ShimmerFrameLayout>-->
 
-    </androidx.cardview.widget.CardView>
+<!--    </androidx.cardview.widget.CardView>-->
 
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="4dp"
-        card_view:cardBackgroundColor="#5CDFE9F2">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:id="@+id/hii"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        card_view:cardCornerRadius="8dp"-->
+<!--        card_view:cardElevation="4dp"-->
+<!--        card_view:cardBackgroundColor="#5CDFE9F2">-->
 
-        <!-- Inside the CardView, you can place any layout or views -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+<!--        &lt;!&ndash; Inside the CardView, you can place any layout or views &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="16dp">-->
+<!--<TextView-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="40dp"-->
+<!--    android:id="@+id/username"/>-->
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="140dp"-->
+<!--                android:id="@+id/blogImage"-->
+<!--                android:layout_gravity="center"/>-->
+<!--            <TextView-->
+<!--                android:id="@+id/textViewTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"/>-->
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:id="@+id/blogImage"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+<!--            <TextView-->
+<!--                android:id="@+id/textViewDescription"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="14sp"-->
+<!--                android:layout_marginTop="8dp"/>-->
 
-            <TextView
-                android:id="@+id/textViewDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp"/>
+<!--        </LinearLayout>-->
 
-        </LinearLayout>
+<!--    </androidx.cardview.widget.CardView>-->
+<!--    <androidx.cardview.widget.CardView-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/hii"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        card_view:cardCornerRadius="8dp"-->
+<!--        card_view:cardElevation="4dp"-->
+<!--        card_view:cardBackgroundColor="#5CDFE9F2">-->
 
-    </androidx.cardview.widget.CardView>
+<!--        &lt;!&ndash; Inside the CardView, you can place any layout or views &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="16dp">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:id="@+id/username2"/>-->
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="140dp"-->
+<!--                android:id="@+id/blogImage2"-->
+<!--                android:layout_gravity="center"/>-->
+<!--            <TextView-->
+<!--                android:id="@+id/textViewTitle2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textViewDescription2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="14sp"-->
+<!--                android:layout_marginTop="8dp"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -121,8 +186,9 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/bottomnav"
         android:background="@color/background_color"
-        app:itemIconTint="@drawable/nav_item"
-        app:itemRippleColor="@drawable/ripple_color"
+        app:itemIconTint="@color/nav_item"
+        app:itemRippleColor="@color/ripple_color"
+        android:stateListAnimator="@animator/icon_animator"
         app:itemIconSize="40dp"
         app:menu="@menu/nav"
         app:labelVisibilityMode="unlabeled"/>
