@@ -106,7 +106,9 @@ public class HomeActivity extends AppCompatActivity {
 
                         for (int i = 0; i < blogsArray.length(); i++) {
                             JSONObject blogObject = blogsArray.getJSONObject(i);
-
+                            
+                            System.out.println(blogObject);
+                            
                             Blog blog = new Blog(
                                     blogObject.getString("content"),
                                     blogObject.getString("email"),

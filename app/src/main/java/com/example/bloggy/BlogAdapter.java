@@ -28,6 +28,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
     @Override
     public BlogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.blog_item, parent, false);
+
         return new BlogViewHolder(view);
     }
 
@@ -38,11 +39,15 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
         holder.title.setText(blog.getTitle());
         holder.content.setText(blog.getContent());
 
+        System.out.println("URL image : "+blog.getImage());
+        System.out.println("Time sTamp "+blog.getTimestamp());
+
         // Load image with Glide, using placeholder and error handling
         Glide.with(context)
                 .load(blog.getImage())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
+
 
         holder.username.setText(blog.getUsername());
         holder.timestamp.setText(blog.getTimestamp());

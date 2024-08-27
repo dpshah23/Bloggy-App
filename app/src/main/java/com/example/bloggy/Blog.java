@@ -10,7 +10,7 @@ public class  Blog {
     private String username;
 
     // Constructor, getters, and setters
-    public Blog(String title, String content, String image, String username, String timestamp, String email, String id) {
+    public Blog(String content, String email, String id, String image, String timestamp, String title, String username) {
         this.title = title;
         this.content = content;
         this.image = image;
