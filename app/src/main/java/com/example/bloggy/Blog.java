@@ -17,7 +17,7 @@ public class  Blog {
         this.username = username;
         this.email = email;
         this.id = id;
-        this.timestamp = this.timestamp;
+        this.timestamp = timestamp;
     }
     public String getUsername(){
         return username;
