@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -45,6 +46,8 @@ public class detailblog extends AppCompatActivity {
 
         setContentView(R.layout.activity_detailblog);
 
+
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
         bottomNavigationView.setSelectedItemId(R.id.home);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -55,6 +58,7 @@ public class detailblog extends AppCompatActivity {
         String blogId = getIntent().getStringExtra("BLOG_ID");
         System.out.println(blogId);
         String jsonPayload=String.format("{\"blogid\":\"%s\"}",blogId);
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -77,6 +81,8 @@ public class detailblog extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
         new Thread(() -> {
             HttpURLConnection connection = null;
@@ -118,6 +124,7 @@ public class detailblog extends AppCompatActivity {
                     JSONObject obj = new JSONObject(String.valueOf(response));
                     String message = obj.getString("message");
 
+
                     runOnUiThread(() -> {
                         if (message.equals("Failed")) {
                             Toast.makeText(detailblog.this, "Blog is unavailable", Toast.LENGTH_SHORT).show();
@@ -140,6 +147,13 @@ public class detailblog extends AppCompatActivity {
                                 disptime.setText(timestamp);
                                 dispuser.setText(username);
 
+                                dispuser.setOnClickListener(v -> {
+                                    Intent intent = new Intent(detailblog.this, UserProfileActivity.class);
+                                    intent.putExtra("username", username);
+                                    startActivity(intent);
+                                });
+
+
                                 Glide.with(detailblog.this)
                                         .load(image)
                                         .into(dispimage);
@@ -156,6 +170,8 @@ public class detailblog extends AppCompatActivity {
                 System.out.println(e);
             }
         }).start();
+
+
 
 
     }
