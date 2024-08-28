@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/btn"
                 android:text="Select Image" />
 
             <!-- Blog Content -->
@@ -75,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:backgroundTint="@color/btn"
                 android:text="Create Blog" />
 
             <!-- Spacer view -->
@@ -89,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/background_color"
+        android:background="@color/background_navbar_color"
         app:itemIconTint="@color/nav_item"
         app:itemRippleColor="@color/ripple_color"
         android:stateListAnimator="@animator/icon_animator"
