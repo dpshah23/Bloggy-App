@@ -23,8 +23,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class CreateBlogActivity extends AppCompatActivity {
 
@@ -73,7 +75,13 @@ public class CreateBlogActivity extends AppCompatActivity {
 
         selectImageButton.setOnClickListener(v -> openImageChooser());
 
-        submitBlogButton.setOnClickListener(v -> submitBlog());
+        submitBlogButton.setOnClickListener(v -> {
+            try {
+                submitBlog();
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void openImageChooser() {
@@ -107,7 +115,7 @@ public class CreateBlogActivity extends AppCompatActivity {
         return base64String.replaceAll("\\s", "");
     }
 
-    private void submitBlog() {
+    private void submitBlog() throws UnsupportedEncodingException {
         String title = blogTitle.getText().toString().trim();
         String content = blogContent.getText().toString().trim();
 
@@ -132,9 +140,12 @@ public class CreateBlogActivity extends AppCompatActivity {
             return;
         }
 
+        String encodedTitle = URLEncoder.encode(title, "UTF-8");
+        String encodedDescription = URLEncoder.encode(content, "UTF-8");
+
         String jsonPayload = String.format(
                 "{\"email\":\"%s\", \"username\":\"%s\", \"title\":\"%s\", \"content\":\"%s\", \"image\":\"%s\"}",
-                email, username, title, content, base64Image
+                email, username, encodedTitle, encodedDescription, base64Image
         );
 
         System.out.println("JSON Payload: " + jsonPayload);

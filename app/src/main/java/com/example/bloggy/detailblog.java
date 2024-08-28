@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
 
 public class detailblog extends AppCompatActivity {
 
@@ -129,8 +130,12 @@ public class detailblog extends AppCompatActivity {
                                 String views = obj.getString("views").toString();
                                 String title = obj.getString("title").toString();
 
-                                dispcontent.setText(content);
-                                disptitle.setText(title);
+
+                                String decodedData = URLDecoder.decode(title, "UTF-8");
+                                String decodedDataDescription = URLDecoder.decode(content, "UTF-8");
+
+                                dispcontent.setText(decodedDataDescription);
+                                disptitle.setText(decodedData);
                                 dispviews.setText(views);
                                 disptime.setText(timestamp);
                                 dispuser.setText(username);

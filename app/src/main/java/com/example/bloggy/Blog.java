@@ -1,5 +1,8 @@
 package com.example.bloggy;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 public class  Blog {
     private String email;
     private String id;
@@ -22,8 +25,9 @@ public class  Blog {
     public String getUsername(){
         return username;
     }
-    public String getTitle() {
-        return title;
+    public String getTitle() throws UnsupportedEncodingException {
+        String decodedData = URLDecoder.decode(title, "UTF-8");
+        return decodedData;
     }
     public String getEmail() {
         return email;
@@ -31,8 +35,12 @@ public class  Blog {
     public String getId() {
         return id;
     }
-    public String getContent() {
-        return content;
+    public String getContent() throws UnsupportedEncodingException {
+
+        String decodedData = URLDecoder.decode(content, "UTF-8");
+
+
+        return decodedData;
     }
     public String getImage() {
         return image;

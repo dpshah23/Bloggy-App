@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder> {
@@ -37,8 +38,13 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
     public void onBindViewHolder(@NonNull BlogViewHolder holder, int position) {
         Blog blog = blogList.get(position);
 
-        holder.title.setText(blog.getTitle());
-        holder.content.setText(blog.getContent());
+        try {
+            holder.title.setText(blog.getTitle());
+            holder.content.setText(blog.getContent());
+
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println("URL image : "+blog.getImage());
         System.out.println("Time sTamp "+blog.getTimestamp());
