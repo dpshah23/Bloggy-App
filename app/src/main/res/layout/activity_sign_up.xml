@@ -109,11 +109,11 @@
         android:id="@+id/signupbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/text_color"
+        android:backgroundTint="@color/btn"
         android:layout_marginTop="25dp"
         android:layout_below="@id/passwordInput"
         android:text="Signup"
-        android:textColor="@color/background_color"
+        android:textColor="@color/text_color_btn"
         android:textSize="25sp" />
 
 </LinearLayout>

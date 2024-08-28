@@ -2,9 +2,9 @@
 <resources>
     <color name="background_color">#000000</color>
     <color name="text_color">#FFFFFF</color>
-    <color name="btn">#E50914</color>
+    <color name="btn">#E8E3D6</color>
     <color name="placeholder_color">#E0E0E0</color>
-
+<color name="text_color_btn">#2C2C2C</color>
     <color name="your_new_color">#FF5733</color>
     <color name="your_new_variant_color">#C70039</color>
     <color name="your_new_dark_color">#900C3F</color>

@@ -71,7 +71,7 @@
         android:backgroundTint="@color/btn"
         android:layout_marginTop="25dp"
         android:text="Login"
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_btn"
         android:textSize="25sp"
         />
 <LinearLayout

@@ -24,6 +24,7 @@
         android:text="Logout"
         android:backgroundTint="@color/btn"
         android:layout_alignParentRight="true"
+        android:textColor="@color/text_color_btn"
         android:id="@+id/logout"/>
         <ImageView
             android:id="@+id/profile_avatar"
