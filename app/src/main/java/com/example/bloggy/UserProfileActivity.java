@@ -18,7 +18,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,7 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class UserProfileActivity extends AppCompatActivity {
-
 
     TextView emaildata;
     TextView usernamedata;
@@ -49,19 +47,15 @@ public class UserProfileActivity extends AppCompatActivity {
 
         emaildata = findViewById(R.id.profile_email);
         usernamedata = findViewById(R.id.profile_username);
-
         namedata = findViewById(R.id.profile_name);
-
         profile_avatar = findViewById(R.id.profile_avatar);
-        followdata=findViewById(R.id.follow);
+        followdata = findViewById(R.id.follow);
 
         SharedPreferences hred = getSharedPreferences("demo", MODE_PRIVATE);
         String username_following = hred.getString("username", "");
+        String username = getIntent().getStringExtra("username");
 
-        String username= getIntent().getStringExtra("username");
-
-        String jsonPayload = String.format("{\"username\":\"%s\",\"username_following\":\"%s\"}", username,username_following);
-
+        String jsonPayload = String.format("{\"username\":\"%s\",\"username_following\":\"%s\"}", username, username_following);
         System.out.println(jsonPayload);
 
         new Thread(() -> {
@@ -76,13 +70,11 @@ public class UserProfileActivity extends AppCompatActivity {
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
 
-
                 OutputStream os = connection.getOutputStream();
                 os.write(jsonPayload.getBytes("UTF-8"));
                 os.flush();
                 os.close();
 
-                // Read response
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -93,8 +85,7 @@ public class UserProfileActivity extends AppCompatActivity {
                         response.append(line);
                     }
 
-                    System.out.println(response);
-                    JSONObject obj = new JSONObject(String.valueOf(response));
+                    JSONObject obj = new JSONObject(response.toString());
                     String message = obj.getString("message");
 
                     runOnUiThread(() -> {
@@ -103,25 +94,67 @@ public class UserProfileActivity extends AppCompatActivity {
                         } else {
                             try {
                                 String usernameDisp = obj.getString("username");
-                                String phone = obj.getString("phone");
                                 String email = obj.getString("email");
                                 String name = obj.getString("name");
                                 String profilePhotoUrl = obj.getString("avatar");
-                                boolean isfollow=obj.getBoolean("is_following");
-                                Log.d("ProfileActivity", "Profile Photo URL: " + profilePhotoUrl);
+                                boolean isFollow = obj.getBoolean("is_following");
 
-                                if(isfollow){
-                                    followdata.setText("Following");
-                                }
-                                else{
-                                    followdata.setText("Follow");
-                                }
-
+                                followdata.setText(isFollow ? "Following" : "Follow");
 
                                 emaildata.setText(email);
                                 usernamedata.setText(usernameDisp);
                                 namedata.setText(name);
 
+                                followdata.setOnClickListener(v -> new Thread(() -> {
+                                    try {
+                                        String followUrlString;
+                                        if (followdata.getText().toString().equals("Following")) {
+                                            followUrlString = String.format("http://10.0.2.2:8000/api/unfollowuser/%s/", usernameDisp);
+                                        } else {
+                                            followUrlString = String.format("http://10.0.2.2:8000/api/followuser/%s/", usernameDisp);
+                                        }
+                                        URL followUrl = new URL(followUrlString);
+                                        HttpURLConnection followConnection = (HttpURLConnection) followUrl.openConnection();
+                                        followConnection.setRequestMethod("POST");
+                                        followConnection.setRequestProperty("Content-Type", "application/json");
+                                        followConnection.setDoOutput(true);
+
+                                        String followJsonPayload = String.format("{\"username\":\"%s\",\"follower\":\"%s\"}", usernameDisp, username_following);
+                                        OutputStream followOs = followConnection.getOutputStream();
+                                        followOs.write(followJsonPayload.getBytes("UTF-8"));
+                                        followOs.flush();
+                                        followOs.close();
+
+                                        int followResponseCode = followConnection.getResponseCode();
+                                        if (followResponseCode == HttpURLConnection.HTTP_OK) {
+                                            BufferedReader followReader = new BufferedReader(new InputStreamReader(followConnection.getInputStream()));
+                                            StringBuilder followResponse = new StringBuilder();
+                                            String followLine;
+
+                                            while ((followLine = followReader.readLine()) != null) {
+                                                followResponse.append(followLine);
+                                            }
+
+                                            JSONObject followObj = new JSONObject(followResponse.toString());
+                                            String followMessage = followObj.getString("message");
+
+                                            runOnUiThread(() -> {
+                                                if (followMessage.equals("Failed")) {
+                                                    Toast.makeText(UserProfileActivity.this, "Action failed", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(UserProfileActivity.this, followMessage, Toast.LENGTH_SHORT).show();
+                                                    if (followdata.getText().toString().equals("Following")) {
+                                                        followdata.setText("Follow");
+                                                    } else {
+                                                        followdata.setText("Following");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    } catch (Exception e) {
+                                        Log.e("UserProfileActivity", "Error during follow/unfollow", e);
+                                    }
+                                }).start());
 
                                 Glide.with(UserProfileActivity.this)
                                         .load(profilePhotoUrl)
@@ -132,13 +165,10 @@ public class UserProfileActivity extends AppCompatActivity {
                             }
                         }
                     });
-
-
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                Log.e("UserProfileActivity", "Error fetching user profile", e);
             }
         }).start();
-
     }
 }

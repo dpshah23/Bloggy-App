@@ -127,10 +127,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_username"
                 android:textSize="25dp"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_btn"
                 />
 
         </RelativeLayout>
+
+
     </ScrollView>
 
 
