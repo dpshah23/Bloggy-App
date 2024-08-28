@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/bottomnav"
-        android:background="@color/background_color"
+        android:background="@color/background_navbar_color"
         app:itemIconTint="@color/nav_item"
         android:stateListAnimator="@animator/icon_animator"
         app:itemIconSize="40dp"

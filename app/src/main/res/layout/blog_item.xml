@@ -16,7 +16,7 @@
             android:layout_marginLeft="30dp"
             card_view:cardCornerRadius="8dp"
             card_view:cardElevation="4dp"
-            card_view:cardBackgroundColor="#5CDFE9F2">
+            card_view:cardBackgroundColor="#2F2F2F">
 
             <!-- Inside the CardView, you can place any layout or views -->
             <LinearLayout
