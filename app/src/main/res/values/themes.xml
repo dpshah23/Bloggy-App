@@ -4,7 +4,7 @@
         <!-- Customize your light theme here. -->
         <item name="android:windowBackground">@color/background_color</item>
         <item name="colorPrimary">@color/background_color</item>
-        <item name="colorPrimaryVariant">@color/your_new_variant_color</item>
+        <item name="colorPrimaryVariant">@color/background_color</item>
         <item name="android:textColor">@color/text_color</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
