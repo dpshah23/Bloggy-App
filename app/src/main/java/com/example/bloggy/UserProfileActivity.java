@@ -1,6 +1,7 @@
 package com.example.bloggy;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -31,6 +33,8 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView usernamedata;
     TextView namedata;
     ImageView profile_avatar;
+    TextView followerdisp;
+    TextView followingdisp;
     Button followdata;
 
     @SuppressLint("MissingInflatedId")
@@ -50,6 +54,8 @@ public class UserProfileActivity extends AppCompatActivity {
         namedata = findViewById(R.id.profile_name);
         profile_avatar = findViewById(R.id.profile_avatar);
         followdata = findViewById(R.id.follow);
+        followerdisp=findViewById(R.id.profile_followers);
+        followingdisp=findViewById(R.id.profile_following);
 
         SharedPreferences hred = getSharedPreferences("demo", MODE_PRIVATE);
         String username_following = hred.getString("username", "");
@@ -98,8 +104,18 @@ public class UserProfileActivity extends AppCompatActivity {
                                 String name = obj.getString("name");
                                 String profilePhotoUrl = obj.getString("avatar");
                                 boolean isFollow = obj.getBoolean("is_following");
+                                Integer followerdata=obj.getInt("total");
+                                Integer followingdata=obj.getInt("following_total");
 
-                                followdata.setText(isFollow ? "Following" : "Follow");
+                                if(isFollow){
+                                    followdata.setText("Following");
+                                }
+                                else{
+                                    followdata.setText("Follow");
+                                }
+
+                                followerdisp.setText(String.valueOf(followerdata));
+                                followingdisp.setText(String.valueOf(followingdata));
 
                                 emaildata.setText(email);
                                 usernamedata.setText(usernameDisp);
