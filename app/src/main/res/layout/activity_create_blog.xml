@@ -91,9 +91,8 @@
         android:layout_alignParentBottom="true"
         android:background="@color/background_color"
         app:itemIconTint="@color/nav_item"
-        app:itemRippleColor="@color/ripple_color"
         android:stateListAnimator="@animator/icon_animator"
         app:itemIconSize="40dp"
         app:menu="@menu/nav"
-        app:labelVisibilityMode="unlabeled" />
+        app:labelVisibilityMode="selected" />
 </RelativeLayout>
