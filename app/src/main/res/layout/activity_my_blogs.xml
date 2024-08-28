@@ -8,6 +8,7 @@
     tools:context=".MyBlogsActivity">
 
     <LinearLayout
+        android:id="@+id/topNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
@@ -17,10 +18,13 @@
             android:src="@drawable/bloggy_logo" />
     </LinearLayout>
 
+    <!-- SwipeRefreshLayout with RecyclerView below the Top Navbar -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/topNavbar"
+        android:layout_above="@id/bottomnav"
         tools:ignore="MissingClass">
 
         <androidx.recyclerview.widget.RecyclerView

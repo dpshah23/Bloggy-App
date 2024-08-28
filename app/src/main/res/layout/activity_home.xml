@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,27 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center">
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="90dp"
-        android:src="@drawable/bloggy_logo" />
-</LinearLayout>
+    <!-- Top Navbar -->
+    <LinearLayout
+        android:id="@+id/topNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="90dp"
+            android:src="@drawable/bloggy_logo" />
+    </LinearLayout>
+
+    <!-- SwipeRefreshLayout with RecyclerView below the Top Navbar -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="MissingClass">
+        android:layout_below="@id/topNavbar"
+        android:layout_above="@id/bottomnav"
+    tools:ignore="MissingClass">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- Bottom Navigation View -->
+<com.google.android.material.bottomnavigation.BottomNavigationView
+android:id="@+id/bottomnav"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_alignParentBottom="true"
+android:background="@color/background_color"
+app:itemIconTint="@color/nav_item"
+app:itemRippleColor="@color/ripple_color"
+android:stateListAnimator="@animator/icon_animator"
+app:itemIconSize="40dp"
+app:menu="@menu/nav"
+app:labelVisibilityMode="unlabeled"/>
+    </RelativeLayout>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/main"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".HomeActivity">-->
+<!--<com.google.android.material.navigationrail.NavigationRailView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:background="@color/background_color"-->
+<!--    android:id="@+id/topnav">-->
+<!--    <ImageView-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="90dp"-->
+<!--        android:src="@drawable/bloggy_logo"-->
+<!--        android:background="@color/background_color"/>-->
+<!--</com.google.android.material.navigationrail.NavigationRailView>-->
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/swipeRefresh"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height=""-->
+<!--        tools:ignore="MissingClass">-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyclerView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="150dp"-->
+<!--            />-->
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
 <!--    <androidx.cardview.widget.CardView-->
 <!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
@@ -90,23 +142,23 @@
 <!--    </androidx.cardview.widget.CardView>-->
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/navid"/>
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/navid"/>-->
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/bottomnav"
-        android:background="@color/background_color"
-        app:itemIconTint="@color/nav_item"
-        app:itemRippleColor="@color/ripple_color"
-        android:stateListAnimator="@animator/icon_animator"
-        app:itemIconSize="40dp"
-        app:menu="@menu/nav"
-        app:labelVisibilityMode="unlabeled"/>
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:id="@+id/bottomnav"-->
+<!--        android:background="@color/background_color"-->
+<!--        app:itemIconTint="@color/nav_item"-->
+<!--        app:itemRippleColor="@color/ripple_color"-->
+<!--        android:stateListAnimator="@animator/icon_animator"-->
+<!--        app:itemIconSize="40dp"-->
+<!--        app:menu="@menu/nav"-->
+<!--        app:labelVisibilityMode="unlabeled"/>-->
 
 
-</RelativeLayout>
+<!--</RelativeLayout>-->
