@@ -1,7 +1,3 @@
-### **README for Bloggy: An Interactive Blog Application (Android)**
-
----
-
 # Bloggy: An Interactive Blog Application
 
 Welcome to **Bloggy**, an interactive blog application designed for Android users. Bloggy enables users to create blogs, view others' blogs, manage their profiles, follow other users, and track blog view counts. The application leverages Firebase for authentication and real-time data synchronization.
