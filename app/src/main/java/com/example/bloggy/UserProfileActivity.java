@@ -5,18 +5,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -49,6 +53,28 @@ public class UserProfileActivity extends AppCompatActivity {
             return insets;
         });
 
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.home) {
+                    startActivity(new Intent(UserProfileActivity.this, HomeActivity.class));
+                    return true;
+                } else if (itemId == R.id.create) {
+                    startActivity(new Intent(UserProfileActivity.this, CreateBlogActivity.class));
+                    return true;
+                } else if (itemId == R.id.myblog) {
+                    startActivity(new Intent(UserProfileActivity.this, MyBlogsActivity.class));
+                    return true;
+                } else if (itemId == R.id.profile) {
+                    startActivity(new Intent(UserProfileActivity.this, ProfileActivity.class));
+                    return true;
+                }
+                return false;
+            }
+        });
         emaildata = findViewById(R.id.profile_email);
         usernamedata = findViewById(R.id.profile_username);
         namedata = findViewById(R.id.profile_name);
@@ -61,6 +87,10 @@ public class UserProfileActivity extends AppCompatActivity {
         String username_following = hred.getString("username", "");
         String username = getIntent().getStringExtra("username");
 
+        if(username_following.equals(username)){
+            followdata.setVisibility(View.GONE);
+
+        }
         String jsonPayload = String.format("{\"username\":\"%s\",\"username_following\":\"%s\"}", username, username_following);
         System.out.println(jsonPayload);
 
@@ -95,8 +125,15 @@ public class UserProfileActivity extends AppCompatActivity {
                     String message = obj.getString("message");
 
                     runOnUiThread(() -> {
+                        if (message.equals("Cannot follow yourself")) {
+                            Toast.makeText(UserProfileActivity.this, "Cannot follow yourself", Toast.LENGTH_SHORT).show();
+                            followdata.setEnabled(false);
+                            return;
+                        }
+
                         if (message.equals("Failed")) {
                             Toast.makeText(UserProfileActivity.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
+                            return;
                         } else {
                             try {
                                 String usernameDisp = obj.getString("username");
@@ -160,8 +197,13 @@ public class UserProfileActivity extends AppCompatActivity {
                                                 } else {
                                                     Toast.makeText(UserProfileActivity.this, followMessage, Toast.LENGTH_SHORT).show();
                                                     if (followdata.getText().toString().equals("Following")) {
+                                                        int followerCount = Integer.parseInt(followerdisp.getText().toString());
+                                                        followerdisp.setText(String.valueOf(--followerCount));
                                                         followdata.setText("Follow");
+
                                                     } else {
+                                                        int followerCount = Integer.parseInt(followerdisp.getText().toString());
+                                                        followerdisp.setText(String.valueOf(++followerCount));
                                                         followdata.setText("Following");
                                                     }
                                                 }
