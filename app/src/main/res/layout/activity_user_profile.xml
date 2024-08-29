@@ -1,0 +1,215 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background_color"
+    tools:context=".ProfileActivity">
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_above="@id/bottomnav">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Avatar Image -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/bloggy_logo" />
+            </LinearLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_avatar"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="none"
+                android:scaleType="centerCrop"
+                android:background="@drawable/ic_launcher_background"
+                android:elevation="6dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="100dp"
+                app:shapeAppearanceOverlay="@style/CircularShapeAppearance" />
+
+            <!-- Name Label -->
+            <TextView
+                android:id="@+id/label_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_avatar"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:text="Name:"
+                android:textSize="18sp"
+                android:textColor="@color/text_color"
+                android:textStyle="bold"/>
+
+            <!-- Name Data -->
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label_name"
+                android:layout_alignBaseline="@id/label_name"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/text_color"
+                android:text="" />
+
+            <!-- Email Label -->
+            <TextView
+                android:id="@+id/label_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_name"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="12dp"
+                android:padding="16dp"
+                android:text="Email:"
+                android:textSize="18sp"
+                android:textColor="@color/text_color"
+                android:textStyle="bold"/>
+
+            <!-- Email Data -->
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label_email"
+                android:layout_alignBaseline="@id/label_email"
+                android:textSize="18sp"
+                android:textColor="@color/text_color"
+                android:layout_marginStart="8dp"
+                android:text="" />
+
+            <!-- Username Label -->
+            <TextView
+                android:id="@+id/label_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_email"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="12dp"
+                android:padding="16dp"
+                android:text="Username:"
+                android:textSize="18sp"
+                android:textColor="@color/text_color"
+                android:textStyle="bold"/>
+
+            <!-- Username Data -->
+            <TextView
+                android:id="@+id/profile_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label_username"
+                android:layout_alignBaseline="@id/label_username"
+                android:textSize="18sp"
+                android:textColor="@color/text_color"
+                android:layout_marginStart="8dp"
+                android:text="" />
+
+            <!-- LinearLayout for Followers and Following -->
+            <LinearLayout
+                android:id="@+id/listfollower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_username"
+                android:layout_marginTop="30dp"
+
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <!-- Followers Section -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/label_followers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Followers:"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/profile_followers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <!-- Following Section -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/label_following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Following:"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/profile_following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Follow Button -->
+            <Button
+                android:id="@+id/follow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listfollower"
+                android:layout_marginTop="8dp"
+                android:background="@color/btn"
+                android:padding="15dp"
+                android:text="Follow"
+                android:textColor="@color/text_color_btn"
+                android:textSize="25sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomnav"
+        android:background="@color/background_navbar_color"
+        app:itemIconTint="@color/nav_item"
+        app:itemRippleColor="@color/ripple_color"
+        android:stateListAnimator="@animator/icon_animator"
+        app:itemIconSize="40dp"
+        app:menu="@menu/nav"
+        app:labelVisibilityMode="unlabeled"/>
+</RelativeLayout>

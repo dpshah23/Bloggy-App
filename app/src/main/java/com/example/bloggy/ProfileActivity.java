@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     ImageView profile_avatar;
 
-    TextView emaildata, usernamedata, phonenodata, namedata;
+    TextView emaildata, usernamedata, phonenodata, namedata , followerdisp , followingdisp;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -87,6 +87,8 @@ public class ProfileActivity extends AppCompatActivity {
         usernamedata = findViewById(R.id.profile_username);
         phonenodata = findViewById(R.id.profile_phone);
         namedata = findViewById(R.id.profile_name);
+        followerdisp=findViewById(R.id.profile_followers);
+        followingdisp=findViewById(R.id.profile_following);
 
         profile_avatar = findViewById(R.id.profile_avatar);
 
@@ -138,6 +140,9 @@ public class ProfileActivity extends AppCompatActivity {
                                 String email = obj.getString("email");
                                 String name = obj.getString("name");
                                 String profilePhotoUrl = obj.getString("avatar");
+                                Integer totalfollowers=obj.getInt("total");
+                                Integer totalfollowing=obj.getInt("following_total");
+
                                 Log.d("ProfileActivity", "Profile Photo URL: " + profilePhotoUrl);
 
 
@@ -145,6 +150,9 @@ public class ProfileActivity extends AppCompatActivity {
                                 usernamedata.setText(usernameDisp);
                                 phonenodata.setText(phone);
                                 namedata.setText(name);
+
+                                followerdisp.setText(String.valueOf(totalfollowers));
+                                followingdisp.setText(String.valueOf(totalfollowing));
 
 
                                 Glide.with(ProfileActivity.this)

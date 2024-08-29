@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bloggy"
         tools:targetApi="31">
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".NoInternetActivity"
             android:exported="false" />
