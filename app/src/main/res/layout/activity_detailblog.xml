@@ -80,6 +80,40 @@
             </LinearLayout>
 
             <!-- Image -->
+
+            <LinearLayout
+                android:id="@+id/listfollower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/views_count"
+                android:layout_marginTop="30dp"
+
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+
+
+
+                    <Button
+                        android:id="@+id/like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+
+                <ImageView
+                    android:id="@+id/profile_following"
+                    android:layout_width="276dp"
+                    android:layout_height="match_parent"
+                    android:maxWidth="25dp"
+                    android:src="@drawable/outline_share_24"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp"
+                    />
+            </LinearLayout>
+
+
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="330dp"
