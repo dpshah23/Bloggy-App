@@ -15,7 +15,7 @@ Welcome to **Bloggy**, an interactive blog application designed for Android user
 1. **Clone the Repository**:
     ```bash
     git clone https://github.com/dpshah23/Bloggy-App.git
-    cd bloggy-android
+    cd Bloggy-App
     ```
 
 2. **Open in Android Studio**:
